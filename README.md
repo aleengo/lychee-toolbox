@@ -1,2 +1,2 @@
 # lychee-toolbox
-Personal android toolbox
+Personal dev toolbox for Android
