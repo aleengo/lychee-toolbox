@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode peach_toolbox.version_code
+        versionName peach_toolbox.version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.support.appcompat
+    implementation deps.support.recyclerview
+
+    // lombok
+    compileOnly deps.lombok
+    annotationProcessor deps.lombok
+
+    testImplementation deps.junit
+    androidTestImplementation deps.android_test_runner
+    androidTestImplementation deps.espresso.core
+}
+
+task cleanDist(type: Delete) {
+    delete "${rootProject.projectDir}/dist"
+}
+
+task distDebug(type: Copy) {
+
+    dependsOn "cleanDist"
+
+    dependsOn "assembleDebug"
+
+    println("copy toolbox-debug.aar to $peach_toolbox.debug_dist")
+
+    description = 'copy the .aar to the dist directory'
+    from("build/outputs/aar") {
+        include '*-debug.aar'
+    }
+    into("${rootProject.projectDir}/dist/debug")
+    rename("toolbox-debug.aar", "$peach_toolbox.debug_dist")
+}
