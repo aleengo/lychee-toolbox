@@ -17,13 +17,16 @@ ext.deps = [:]
 def peach_toolbox = [:]
 peach_toolbox.version_code = 1
 peach_toolbox.version_name = "0.1.0"
-peach_toolbox.SNAPSHOT = "0.1-SNAPSHOT"
-peach_toolbox.group = "com.kimboofactory"
+peach_toolbox.commons_version = "0.1.0"
+
+peach_toolbox.group = "com.aleengo"
 peach_toolbox.artifact = "peach-toolbox"
 peach_toolbox.description = "Personal dev tools for Android"
-peach_toolbox.debug_dist = "peach-toolbox-$peach_toolbox.SNAPSHOT" + ".aar"
-ext.peach_toolbox = peach_toolbox
 
+peach_toolbox.debug_dist = "peach-toolbox-android-${peach_toolbox.version_name}-alpha01.aar"
+peach_toolbox.commons_dist = "peach-toolbox-commons-${peach_toolbox.commons_version}-alpha01.jar"
+
+ext.peach_toolbox = peach_toolbox
 
 def versions = [:]
 versions.android_gradle_plugin = "3.2.1"
@@ -32,6 +35,8 @@ versions.junit = "4.12"
 versions.test_runner = "1.1.2-alpha01"
 versions.espresso = "3.1.2-alpha01"
 versions.lombok = "1.16.20"
+versions.okhttp = "3.12.0"
+versions.butterknife = "10.0.0"
 
 def build_versions = [:]
 build_versions.min_sdk = 15
@@ -45,11 +50,20 @@ deps.junit = "junit:junit:$versions.junit"
 deps.android_test_runner = "androidx.test:runner:$versions.test_runner"
 deps.lombok = "org.projectlombok:lombok:$versions.lombok"
 
+def butterknife = [:]
+butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"
+butterknife.compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
+deps.butterknife = butterknife
+
 def support = [:]
 support.appcompat = "androidx.appcompat:appcompat:$versions.support"
 support.recyclerview = "androidx.recyclerview:recyclerview:$versions.support"
 support.cardview = "androidx.cardview:cardview:$versions.support"
 deps.support = support
+
+def okhttp = [:]
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+deps.okhttp = okhttp
 
 def espresso = [:]
 espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"

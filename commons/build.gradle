@@ -1,0 +1,33 @@
+apply plugin: 'java-library'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // lombok
+    implementation deps.lombok
+    annotationProcessor deps.lombok
+
+    // okhttp
+    implementation deps.okhttp.runtime
+}
+
+task cleanDistFolder(type: Delete) {
+    delete "${rootProject.projectDir}/dist/commons"
+}
+
+task distJar(type: Copy) {
+
+    dependsOn "cleanDistJar"
+
+    dependsOn "jar"
+
+    println("copy commons.jar to $peach_toolbox.commons_dist")
+    from("build/libs")
+    into("${rootProject.projectDir}/dist/commons")
+    rename("commons.jar", "$peach_toolbox.commons_dist")
+
+
+}

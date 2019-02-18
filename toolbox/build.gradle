@@ -37,18 +37,22 @@ dependencies {
     compileOnly deps.lombok
     annotationProcessor deps.lombok
 
+    // butterknife
+    implementation deps.butterknife.runtime
+    annotationProcessor deps.butterknife.compiler
+
     testImplementation deps.junit
     androidTestImplementation deps.android_test_runner
     androidTestImplementation deps.espresso.core
 }
 
-task cleanDist(type: Delete) {
-    delete "${rootProject.projectDir}/dist"
+task cleanDistDebug(type: Delete) {
+    delete "${rootProject.projectDir}/dist/android/debug"
 }
 
 task distDebug(type: Copy) {
 
-    dependsOn "cleanDist"
+    dependsOn "cleanDistDebug"
 
     dependsOn "assembleDebug"
 
@@ -58,6 +62,6 @@ task distDebug(type: Copy) {
     from("build/outputs/aar") {
         include '*-debug.aar'
     }
-    into("${rootProject.projectDir}/dist/debug")
+    into("${rootProject.projectDir}/dist/android/debug")
     rename("toolbox-debug.aar", "$peach_toolbox.debug_dist")
 }
