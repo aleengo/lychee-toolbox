@@ -1,7 +1,9 @@
 package com.aleengo.peach.toolbox.commons.net;
 
+import com.aleengo.peach.toolbox.commons.concurrent.DefaultCallback;
+
 import lombok.Getter;
-import okhttp3.Callback;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
@@ -13,17 +15,23 @@ public final class RequestConfig {
     @Getter
     private String method;
     @Getter
-    private String url;
+    private String endPoint;
+    @Getter
+    private String baseUrl;
     @Getter
     private RequestBody requestBody;
     @Getter
-    private Callback callback;
+    private Request.Builder requestBuilder;
+    @Getter
+    private DefaultCallback callback;
 
     private RequestConfig(Builder builder) {
         this.method = builder.method;
-        this.url = builder.url;
-        this.callback = builder.callback;
+        this.endPoint = builder.endPoint;
+        this.baseUrl = builder.baseUrl;
         this.requestBody = builder.requestBody;
+        this.requestBuilder = builder.requestBuilder;
+        this.callback = builder.callback;
     }
 
     public Builder newBuilder() {
@@ -32,18 +40,24 @@ public final class RequestConfig {
 
     public static class Builder {
         private String method;
-        private String url;
+        private String endPoint;
+        private String baseUrl;
         private RequestBody requestBody;
-        private Callback callback;
+        private Request.Builder requestBuilder;
+        private DefaultCallback callback;
 
-
-        public Builder() {}
+        public Builder(String method, DefaultCallback callback) {
+            this.method = method;
+            this.callback = callback;
+        }
 
         public Builder(RequestConfig config) {
             this.method = config.method;
-            this.url = config.url;
-            this.callback = config.callback;
+            this.endPoint = config.endPoint;
+            this.baseUrl = config.baseUrl;
+            this.requestBuilder = config.requestBuilder;
             this.requestBody = config.requestBody;
+            this.callback = config.callback;
         }
 
         public Builder method(String method) {
@@ -51,16 +65,32 @@ public final class RequestConfig {
             return this;
         }
 
-        public Builder url(String url) {
-            this.url = url;
+        public Builder endPoint(String endpoint) {
+            this.endPoint = endpoint;
             return this;
         }
+
+        public Builder baseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+            return this;
+        }
+
         public Builder requestBody(RequestBody requestBody) {
             this.requestBody = requestBody;
             return this;
         }
 
-        public Builder callback(Callback callback) {
+        /**
+         * add new configuration to {@link Request.Builder} object
+         * @param requestBuilder The new Request Builder
+         * @return A builder
+         */
+        public Builder requestBuilder(Request.Builder requestBuilder) {
+            this.requestBuilder = requestBuilder;
+            return this;
+        }
+
+        public Builder callback(DefaultCallback callback) {
             this.callback = callback;
             return this;
         }
@@ -69,15 +99,12 @@ public final class RequestConfig {
             if (method == null) {
                 throw new IllegalArgumentException("method may not be null. Method correspond to HTTP methods");
             }
-
-            if (url == null) {
-                throw new IllegalArgumentException("url may not be null.");
+            if (endPoint == null && baseUrl == null) {
+                throw new IllegalArgumentException("endPoint or baseUrl may not be null.");
             }
-
             if (callback == null) {
                 throw new IllegalArgumentException("callback may not be null.");
             }
-
             return new RequestConfig(this);
         }
     }

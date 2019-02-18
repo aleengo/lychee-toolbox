@@ -17,7 +17,7 @@ ext.deps = [:]
 def peach_toolbox = [:]
 peach_toolbox.version_code = 1
 peach_toolbox.version_name = "0.1.0"
-peach_toolbox.commons_version = "0.1.0"
+peach_toolbox.commons_version = "0.1.1"
 
 peach_toolbox.group = "com.aleengo"
 peach_toolbox.artifact = "peach-toolbox"
