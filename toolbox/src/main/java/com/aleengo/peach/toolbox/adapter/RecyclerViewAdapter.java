@@ -16,7 +16,7 @@ import lombok.Getter;
  * Copyright (c) 2019. All rights reserved.
  */
 public abstract class RecyclerViewAdapter<E, VH extends RecyclerViewAdapter.ViewHolder>
-        extends RecyclerView.Adapter<VH> implements PeachAdapter {
+        extends RecyclerView.Adapter<VH> implements PeachAdapter<E> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private View itemView;

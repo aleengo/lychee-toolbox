@@ -14,7 +14,7 @@ import lombok.Getter;
  * Copyright (c) 2019. All rights reserved.
  */
 public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> extends BaseAdapter
-        implements PeachAdapter {
+        implements PeachAdapter<E> {
 
     /**
      * ViewHolder Class

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Created by CK_ALEENGO on 15/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public interface PeachAdapter {
+public interface PeachAdapter<E> {
 
     /**
      * Returns the layout Resource R.layout.name_of_the_layout
@@ -34,7 +34,7 @@ public interface PeachAdapter {
      *
      * @return A new ViewHolder that holds a View of the given view type.
      */
-    Object onNewViewHolder(View view);
+    E onNewViewHolder(View view);
 
     /**
      * Clear the data within the Adapter
@@ -47,5 +47,5 @@ public interface PeachAdapter {
      * with the new one
      * @param newItems New items to populate Adapter with
      */
-    void updateItems(List<Object> newItems);
+    void updateItems(List<E> newItems);
 }
