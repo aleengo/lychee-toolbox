@@ -14,6 +14,7 @@ dependencies {
     implementation deps.okhttp.runtime
 }
 
+/*
 task cleanDistFolder(type: Delete) {
     delete "${rootProject.projectDir}/dist/commons"
 }
@@ -28,6 +29,4 @@ task distJar(type: Copy) {
     from("build/libs")
     into("${rootProject.projectDir}/dist/commons")
     rename("commons.jar", "$peach_toolbox.commons_dist")
-
-
-}
+}*/

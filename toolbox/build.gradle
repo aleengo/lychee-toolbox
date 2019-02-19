@@ -30,6 +30,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(':commons')
+
     implementation deps.support.appcompat
     implementation deps.support.recyclerview
 
@@ -45,7 +47,7 @@ dependencies {
     androidTestImplementation deps.android_test_runner
     androidTestImplementation deps.espresso.core
 }
-
+/*
 task cleanDistDebug(type: Delete) {
     delete "${rootProject.projectDir}/dist/android/debug"
 }
@@ -64,4 +66,4 @@ task distDebug(type: Copy) {
     }
     into("${rootProject.projectDir}/dist/android/debug")
     rename("toolbox-debug.aar", "$peach_toolbox.debug_dist")
-}
+}*/
