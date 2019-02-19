@@ -1,22 +1,6 @@
 package com.aleengo.peach.toolbox.commons.Main;
 
-import com.aleengo.peach.toolbox.commons.concurrent.ConcurrentService;
-import com.aleengo.peach.toolbox.commons.concurrent.DefaultCallback;
-import com.aleengo.peach.toolbox.commons.net.OkHttpSingleton;
-import com.aleengo.peach.toolbox.commons.net.RequestConfig;
-import com.aleengo.peach.toolbox.commons.net.RequestWrapper;
-
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
-import okhttp3.OkHttpClient;
 
 /**
  * Created by CK_ALEENGO on 18/02/2019.
@@ -30,41 +14,56 @@ public class Main {
 
     public static void main(String[] args) throws UnknownHostException {
 
-        final DefaultCallback callback = new DefaultCallback();
-        String host = "";
+       /* String host = "";
         InetAddress address = Inet4Address.getByName(host);
 
         final OkHttpClient client = OkHttpSingleton.getInstance().getClient()
                 .newBuilder()
-                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(address, 3000)))
+                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(address, 2800)))
                 .build();
 
-        final RequestConfig latest =
-                new RequestConfig.Builder(RequestWrapper.GET_METHOD, new DefaultCallback())
+        final RequestConfig latestCfg =
+                new RequestConfig.Builder(new DefaultCallback())
                         .baseUrl(BASE_URL)
                         .endPoint(LATEST)
                         .build();
 
-        final RequestConfig currencies =
-                new RequestConfig.Builder(RequestWrapper.GET_METHOD, new DefaultCallback())
+        final RequestConfig currenciesCfg =
+                new RequestConfig.Builder(new DefaultCallback())
                         .baseUrl(BASE_URL)
                         .endPoint(CURRENCIES)
                         .build();
 
-        final RequestWrapper req1 = new RequestWrapper(client, latest);
-        final RequestWrapper req2 = new RequestWrapper(client, currencies);
+        final RequestWrapper req1 = new RequestWrapper(client, latestCfg);
+        final RequestWrapper req2 = new RequestWrapper(client, currenciesCfg);*/
 
-        final List<Future<String>> futureList = ConcurrentService.execute(Arrays.asList(req1, req2));
+        /*final List<Future<String>> futureList = HttpService.execute(Arrays.asList(req1, req2));
 
         final Future<String> future1 = futureList.get(0);
         final Future<String> future2 = futureList.get(1);
 
-        futureList.forEach(stringFuture -> {
-            try {
-                System.out.println(stringFuture.get());
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+        String result1 = null;
+        String result2 = null;
+
+        while (true) {
+            if (future1.isDone() && future2.isDone()) {
+                try {
+                    result1 = future1.get();
+                    result2 = future2.get();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("task execution on thread (while run): " + Thread.currentThread().getName());
+                break;
             }
-        });
+        }*/
+
+      /*  HttpService.execute(Arrays.asList(req2, req1), (results, throwable) -> {
+            //System.out.println("task execution on thread (onComplete): " + Thread.currentThread().getName());
+            if (throwable != null) {
+                throw new RuntimeException(throwable);
+            }
+            results.forEach(result -> System.out.println(result.getValue()));
+        });*/
     }
 }

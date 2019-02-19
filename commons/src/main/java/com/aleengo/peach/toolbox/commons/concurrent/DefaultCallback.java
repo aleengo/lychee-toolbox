@@ -16,15 +16,16 @@ import okhttp3.Response;
 public class DefaultCallback implements Callback {
 
     @Getter
-    private final CompletableFuture<String> future;
+    private final CompletableFuture<String> completableFuture;
 
     public DefaultCallback() {
-        this.future = new CompletableFuture<>();
+        this.completableFuture = new CompletableFuture<>();
     }
 
     @Override
     public void onFailure(Call call, IOException e) {
-        future.completeExceptionally(e.getCause());
+        completableFuture.completeExceptionally(e.getCause());
+        throw new RuntimeException(e);
     }
 
     @Override
@@ -32,9 +33,11 @@ public class DefaultCallback implements Callback {
 
         if (response.isSuccessful()) {
             final String body = response.body().string();
-            future.complete(body);
+            completableFuture.complete(body);
         } else {
-            future.completeExceptionally(new RuntimeException(response.toString()));
+            final Throwable ex = new Throwable(response.code() + " - " + response.message());
+            completableFuture.completeExceptionally(ex);
+            throw new RuntimeException(ex);
         }
     }
 }

@@ -13,7 +13,7 @@ import okhttp3.RequestBody;
 public final class RequestConfig {
 
     @Getter
-    private String method;
+    private RequestWrapper.Method method;
     @Getter
     private String endPoint;
     @Getter
@@ -39,14 +39,18 @@ public final class RequestConfig {
     }
 
     public static class Builder {
-        private String method;
+        private RequestWrapper.Method method;
         private String endPoint;
         private String baseUrl;
         private RequestBody requestBody;
         private Request.Builder requestBuilder;
         private DefaultCallback callback;
 
-        public Builder(String method, DefaultCallback callback) {
+        public Builder(DefaultCallback callback) {
+            this(RequestWrapper.Method.GET, callback);
+        }
+
+        public Builder(RequestWrapper.Method method, DefaultCallback callback) {
             this.method = method;
             this.callback = callback;
         }
@@ -60,7 +64,7 @@ public final class RequestConfig {
             this.callback = config.callback;
         }
 
-        public Builder method(String method) {
+        public Builder method(RequestWrapper.Method method) {
             this.method = method;
             return this;
         }
@@ -97,7 +101,7 @@ public final class RequestConfig {
 
         public RequestConfig build() {
             if (method == null) {
-                throw new IllegalArgumentException("method may not be null. Method correspond to HTTP methods");
+                throw new IllegalArgumentException("method may not be null. MethodType correspond to HTTP methods");
             }
             if (endPoint == null && baseUrl == null) {
                 throw new IllegalArgumentException("endPoint or baseUrl may not be null.");

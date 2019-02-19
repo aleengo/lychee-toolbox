@@ -15,11 +15,6 @@ import okhttp3.Request;
 
 public final class RequestWrapper {
 
-    public static final String GET_METHOD = "GET";
-    public static final String POST_METHOD = "POST";
-    public static final String PUT_METHOD = "PUT";
-    public static final String DELETE_METHOD = "DELETE";
-
     private static final OkHttpClient DEFAULT_CLIENT = OkHttpSingleton.getInstance().getClient();
 
     @Getter
@@ -38,9 +33,7 @@ public final class RequestWrapper {
         this.client = client;
         this.config = config;
 
-        this.request = getRequestBuilder()
-                .method(config.getMethod(), config.getRequestBody())
-                .build();
+        this.request = buildRequest();
     }
 
     /*public void get(final String endPoint, Callback callback) {
@@ -94,16 +87,12 @@ public final class RequestWrapper {
         return new Builder(this);
     }*/
 
-    private void execute(final RequestConfig config) {
-        this.request = getRequestBuilder()
-                .method(config.getMethod(), config.getRequestBody())
-                .build();
-
-        final Call call = this.client.newCall(this.request);
+    public void execute() {
+        final Call call = client.newCall(this.request);
         call.enqueue(config.getCallback());
     }
 
-    private Request.Builder getRequestBuilder() {
+    private Request buildRequest() {
 
         final StringBuilder sb = new StringBuilder();
 
@@ -118,16 +107,42 @@ public final class RequestWrapper {
         }
 
         final HttpUrl _url = HttpUrl.parse(sb.toString());
-        Request.Builder defaultConfig = new Request.Builder().url(_url.toString());
+
+        final Request.Builder builder = new Request.Builder()
+                .url(_url.toString())
+                .method(config.getMethod().get(), config.getRequestBody());
+
+        Request currentRequest = builder.build();
 
         if (config.getRequestBuilder() != null) {
-            final Request oldRequest = defaultConfig.build();
-            config.getRequestBuilder().url(oldRequest.url());
+            Request newRequest = config.getRequestBuilder().build();
+            if (newRequest.url() == null) {
+                config.getRequestBuilder().url(currentRequest.url());
+            }
 
-            defaultConfig = config.getRequestBuilder();
+            if (newRequest.method() == null) {
+                config.getRequestBuilder().method(currentRequest.method(), currentRequest.body());
+            }
+            currentRequest = config.getRequestBuilder().build();
         }
 
-        return defaultConfig;
+        return currentRequest;
+    }
+
+
+    public enum Method {
+        GET("GET"),
+        POST("POST"),
+        PUT("DELETE"),
+        DELETE("DELETE");
+
+        private String method;
+        Method(String method) {
+            this.method = method;
+        }
+        public String get() {
+            return method;
+        }
     }
 
 /*    public static class Builder {
