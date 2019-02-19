@@ -83,6 +83,23 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
     }
 
     /**
+     * Called when ListView needs a new {@link ViewHolder} of the given type to represent
+     * an item.
+     * <p>
+     * This new ViewHolder should be constructed with a new View that can represent the items
+     * of the given type. You can either create a new View manually or inflate it from an XML
+     * layout file.
+     * <p>
+     * The new ViewHolder will be used to display items of the adapter using
+     * onBindViewHolder.
+     *
+     * @param view The view that can represent the items.
+     *
+     * @return A new ViewHolder that holds a View of the given view type.
+     */
+    protected abstract VH onNewViewHolder(View view);
+
+    /**
      * Called by BaseAdapter to display the data at the specified position. This method should
      * update the contents of the {@link ListViewAdapter.ViewHolder#itemView} to reflect
      * the item at the given position.
