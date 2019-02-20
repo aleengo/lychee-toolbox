@@ -17,19 +17,20 @@ ext.deps = [:]
 def peach_toolbox = [:]
 peach_toolbox.version_code = 1
 peach_toolbox.version_name = "0.1.0"
-peach_toolbox.commons_version = "0.1.1"
-
-peach_toolbox.group = "com.aleengo"
+peach_toolbox.commons_version = "rc-0.1.1"
+peach_toolbox.toolbox_version = "rc-0.1.0"
+peach_toolbox.group = "com.github.aleengo.peach-toolbox"
 peach_toolbox.artifact = "peach-toolbox"
 peach_toolbox.description = "Personal dev tools for Android"
 
-peach_toolbox.debug_dist = "peach-toolbox-android-${peach_toolbox.version_name}-alpha01.aar"
-peach_toolbox.commons_dist = "peach-toolbox-commons-${peach_toolbox.commons_version}-alpha01.jar"
+/*peach_toolbox.debug_dist = "peach-toolbox-android-${peach_toolbox.version_name}-alpha01.aar"
+peach_toolbox.commons_dist = "peach-toolbox-commons-${peach_toolbox.commons_version}-alpha01.jar"*/
 
 ext.peach_toolbox = peach_toolbox
 
 def versions = [:]
 versions.android_gradle_plugin = "3.2.1"
+versions.android_maven_gradle_plugin = "2.1"
 versions.support = "1.1.0-alpha02"
 versions.junit = "4.12"
 versions.test_runner = "1.1.2-alpha01"
@@ -46,6 +47,7 @@ ext.build_versions = build_versions
 
 def deps = [:]
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.android_maven_gradle_plugin = "com.github.dcendents:android-maven-gradle-plugin:$versions.android_maven_gradle_plugin"
 deps.junit = "junit:junit:$versions.junit"
 deps.android_test_runner = "androidx.test:runner:$versions.test_runner"
 deps.lombok = "org.projectlombok:lombok:$versions.lombok"

@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.aleengo.peach-toolbox'
+group=peach_toolbox.group
+version=peach_toolbox.toolbox_version
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -50,23 +51,3 @@ dependencies {
     androidTestImplementation deps.android_test_runner
     androidTestImplementation deps.espresso.core
 }
-/*
-task cleanDistDebug(type: Delete) {
-    delete "${rootProject.projectDir}/dist/android/debug"
-}
-
-task distDebug(type: Copy) {
-
-    dependsOn "cleanDistDebug"
-
-    dependsOn "assembleDebug"
-
-    println("copy toolbox-debug.aar to $peach_toolbox.debug_dist")
-
-    description = 'copy the .aar to the dist directory'
-    from("build/outputs/aar") {
-        include '*-debug.aar'
-    }
-    into("${rootProject.projectDir}/dist/android/debug")
-    rename("toolbox-debug.aar", "$peach_toolbox.debug_dist")
-}*/
