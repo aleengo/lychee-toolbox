@@ -7,14 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
+
+import androidx.annotation.LayoutRes;
 import lombok.Getter;
 
 /**
  * Created by CK_ALEENGO on 15/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> extends BaseAdapter
-        implements PeachAdapter<E> {
+public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> extends BaseAdapter {
 
     /**
      * ViewHolder Class
@@ -65,7 +66,7 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
         VH viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(getLayoutResId(), null);
-            viewHolder = (VH) onNewViewHolder(convertView);
+            viewHolder = onNewViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (VH) convertView.getTag();
@@ -74,13 +75,21 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
         return convertView;
     }
 
-    @Override
     public void clear() {
         if (items != null && items.size() > 0) {
             items.clear();
             notifyDataSetChanged();
         }
     }
+
+    public void updateItems(List<E> newItems) {
+        if (newItems != null && newItems.size() > 0) {
+            this.items.addAll(newItems);
+            notifyDataSetChanged();
+        }
+    }
+
+    protected abstract @LayoutRes int getLayoutResId();
 
     /**
      * Called when ListView needs a new {@link ViewHolder} of the given type to represent

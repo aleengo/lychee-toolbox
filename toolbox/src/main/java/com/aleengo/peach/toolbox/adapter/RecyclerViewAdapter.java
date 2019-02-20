@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import lombok.Getter;
  * Copyright (c) 2019. All rights reserved.
  */
 public abstract class RecyclerViewAdapter<E, VH extends RecyclerViewAdapter.ViewHolder>
-        extends RecyclerView.Adapter<VH> implements PeachAdapter<E> {
+        extends RecyclerView.Adapter<VH>  {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private View itemView;
@@ -39,7 +40,7 @@ public abstract class RecyclerViewAdapter<E, VH extends RecyclerViewAdapter.View
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(mContext).inflate(getLayoutResId(), parent);
-        return (VH) onNewViewHolder(view);
+        return onNewViewHolder(view);
     }
 
     @Override
@@ -47,13 +48,21 @@ public abstract class RecyclerViewAdapter<E, VH extends RecyclerViewAdapter.View
         return items != null ? items.size() : 0;
     }
 
-    @Override
     public void clear() {
         if (items != null && items.size() > 0) {
             items.clear();
             notifyDataSetChanged();
         }
     }
+
+    public void updateItems(List<E> newItems) {
+        if (newItems != null && newItems.size() > 0) {
+            this.items.addAll(newItems);
+            notifyDataSetChanged();
+        }
+    }
+
+    protected abstract @LayoutRes int getLayoutResId();
 
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
