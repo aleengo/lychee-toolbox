@@ -14,19 +14,19 @@
  */
 ext.deps = [:]
 
-def peach_toolbox = [:]
-peach_toolbox.version_code = 1
-peach_toolbox.version_name = "0.1.0"
-peach_toolbox.commons_version = "rc-0.1.1"
-peach_toolbox.toolbox_version = "rc-0.1.0"
-peach_toolbox.group = "com.github.aleengo.peach-toolbox"
-peach_toolbox.artifact = "peach-toolbox"
-peach_toolbox.description = "Personal dev tools for Android"
+def toolbox = [:]
+toolbox.version_code = 1
+toolbox.version_name = "0.1.0"
+toolbox.commons_version = "rc0.1.1"
+toolbox.android_version = "rc0.1.0"
+toolbox.group = "com.github.aleengo.peach-toolbox"
+toolbox.artifact = "peach-toolbox"
+toolbox.description = "Personal dev tools for Android"
 
 /*peach_toolbox.debug_dist = "peach-toolbox-android-${peach_toolbox.version_name}-alpha01.aar"
 peach_toolbox.commons_dist = "peach-toolbox-commons-${peach_toolbox.commons_version}-alpha01.jar"*/
 
-ext.peach_toolbox = peach_toolbox
+ext.toolbox = toolbox
 
 def versions = [:]
 versions.android_gradle_plugin = "3.2.1"

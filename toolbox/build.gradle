@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group=peach_toolbox.group
-version=peach_toolbox.toolbox_version
+group=toolbox.group
+version=toolbox.android_version
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode peach_toolbox.version_code
-        versionName peach_toolbox.version_name
+        versionCode toolbox.version_code
+        versionName toolbox.version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

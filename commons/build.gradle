@@ -1,7 +1,8 @@
 apply plugin: 'java-library'
 apply plugin: 'maven'
 
-group='com.github.aleengo.peach-toolbox'
+group=toolbox.group
+version=toolbox.commons_version
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -17,26 +18,9 @@ dependencies {
     implementation deps.okhttp.runtime
 }
 
-/*
-task cleanDistFolder(type: Delete) {
-    delete "${rootProject.projectDir}/dist/commons"
-}
-
-task distJar(type: Copy) {
-
-    dependsOn "cleanDistJar"
-
-    dependsOn "jar"
-
-    println("copy commons.jar to $peach_toolbox.commons_dist")
-    from("build/libs")
-    into("${rootProject.projectDir}/dist/commons")
-    rename("commons.jar", "$peach_toolbox.commons_dist")
-}*/
-
 task sourcesJar(type: Jar) {
     classifier = 'sources'
-    from sourceSets.main.java
+    from sourceSets.main.allSource
 }
 
 task classesJar(type: Jar) {
