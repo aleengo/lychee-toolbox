@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/peach/peach.iml" filepath="$PROJECT_DIR$/peach/peach.iml" />
       <module fileurl="file://$PROJECT_DIR$/peach-toolbox.iml" filepath="$PROJECT_DIR$/peach-toolbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/toolbox/toolbox.iml" filepath="$PROJECT_DIR$/toolbox/toolbox.iml" />
     </modules>

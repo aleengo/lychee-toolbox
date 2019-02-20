@@ -1,4 +1,7 @@
 apply plugin: 'java-library'
+apply plugin: 'maven'
+
+group='com.github.aleengo.peach-toolbox'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -30,3 +33,17 @@ task distJar(type: Copy) {
     into("${rootProject.projectDir}/dist/commons")
     rename("commons.jar", "$peach_toolbox.commons_dist")
 }*/
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.java
+}
+
+task classesJar(type: Jar) {
+    from "$buildDir/libs"
+}
+
+artifacts {
+    archives classesJar
+    archives sourcesJar
+}

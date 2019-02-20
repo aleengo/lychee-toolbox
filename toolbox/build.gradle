@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+group='com.github.aleengo.peach-toolbox'
+
 android {
     compileSdkVersion build_versions.target_sdk
 
@@ -30,7 +32,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':commons')
+    //implementation project(':commons')
 
     implementation deps.support.appcompat
     implementation deps.support.recyclerview
