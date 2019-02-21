@@ -21,7 +21,7 @@ public class OkHttpSingleton {
 
     // Bill Pugh implementation
     private static class LazyHolder {
-        public static final OkHttpSingleton INSTANCE = new OkHttpSingleton();
+        private static final OkHttpSingleton INSTANCE = new OkHttpSingleton();
     }
 
 

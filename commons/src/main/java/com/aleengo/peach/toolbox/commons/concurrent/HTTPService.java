@@ -1,7 +1,7 @@
 package com.aleengo.peach.toolbox.commons.concurrent;
 
 import com.aleengo.peach.toolbox.commons.common.OnCompleteCallback;
-import com.aleengo.peach.toolbox.commons.common.Result;
+import com.aleengo.peach.toolbox.commons.common.Response;
 import com.aleengo.peach.toolbox.commons.net.RequestWrapper;
 
 import java.util.ArrayList;
@@ -40,28 +40,24 @@ public class HTTPService {
     }
 
     private static Future<String> _execute(RequestWrapper wrapper) {
-        final Runnable task = () -> {
-            //System.out.println("task execution on thread (runnable) : " + Thread.currentThread().getName());
-            wrapper.execute();
-        };
-
+        final Runnable task = wrapper::execute;
         getService().submit(task);
         return wrapper.getConfig().getCallback().getCompletableFuture();
     }
 
-    private static <T> void process(List<Future<T>> futures, OnCompleteCallback callback) {
+    private static <T> void process(List<Future<T>> futures, OnCompleteCallback<T> callback) {
 
         //System.out.println("task execution on thread (process) : " + Thread.currentThread().getName());
         // The CompletableFuture.allOf static method
         // allows to wait for completion of all of the Futures provided
-        final CompletableFuture<List<Result>> response =
+        final CompletableFuture<List<T>> response =
                 CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
                         .thenApply(v -> {
                             //System.out.println("task execution on thread (process thenApply) : " + Thread.currentThread().getName());
                             return futures.stream()
                                     .map(future -> {
                                         try {
-                                            return new Result(future.get());
+                                            return future.get();
                                         } catch (InterruptedException | ExecutionException e) {
                                             throw new RuntimeException(e);
                                         }
@@ -72,9 +68,9 @@ public class HTTPService {
             //System.out.println("task execution on thread (whenComplete) : " + Thread.currentThread().getName());
             if (throwable != null) {
                 response.completeExceptionally(throwable);
-                callback.onComplete(null, throwable);
+                callback.onComplete(new Response<>(results, throwable));
             }
-            callback.onComplete(results, null);
+            callback.onComplete(new Response<>(results, throwable));
         });
     }
 
@@ -82,8 +78,8 @@ public class HTTPService {
         return LazyHolder.INSTANCE;
     }
 
+
     private static class LazyHolder {
-        private static final ExecutorService INSTANCE =
-                Executors.newFixedThreadPool(MAX_POOL_SIZE);
+        private static final ExecutorService INSTANCE = Executors.newFixedThreadPool(MAX_POOL_SIZE);
     }
 }

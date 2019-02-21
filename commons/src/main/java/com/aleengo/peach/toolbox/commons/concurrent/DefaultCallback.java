@@ -35,7 +35,7 @@ public class DefaultCallback implements Callback {
             final String body = response.body().string();
             completableFuture.complete(body);
         } else {
-            final Throwable ex = new Throwable(response.code() + " - " + response.message());
+            final Throwable ex = new Throwable("Reason : " + response.code() + " - " + response.message());
             completableFuture.completeExceptionally(ex);
             throw new RuntimeException(ex);
         }
