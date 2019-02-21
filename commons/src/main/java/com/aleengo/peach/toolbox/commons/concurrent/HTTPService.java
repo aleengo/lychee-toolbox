@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
  * Created by CK_ALEENGO on 18/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public class HttpService {
+public class HTTPService {
 
     private static final int MAX_POOL_SIZE = 2;
 
-    private HttpService() {
+    private HTTPService() {
     }
 
     public static void execute(RequestWrapper wrapper, OnCompleteCallback callback) {

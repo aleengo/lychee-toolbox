@@ -37,7 +37,7 @@ public class Main {
         final RequestWrapper req1 = new RequestWrapper(client, latestCfg);
         final RequestWrapper req2 = new RequestWrapper(client, currenciesCfg);*/
 
-        /*final List<Future<String>> futureList = HttpService.execute(Arrays.asList(req1, req2));
+        /*final List<Future<String>> futureList = HTTPService.execute(Arrays.asList(req1, req2));
 
         final Future<String> future1 = futureList.get(0);
         final Future<String> future2 = futureList.get(1);
@@ -58,7 +58,7 @@ public class Main {
             }
         }*/
 
-      /*  HttpService.execute(Arrays.asList(req2, req1), (results, throwable) -> {
+      /*  HTTPService.execute(Arrays.asList(req2, req1), (results, throwable) -> {
             //System.out.println("task execution on thread (onComplete): " + Thread.currentThread().getName());
             if (throwable != null) {
                 throw new RuntimeException(throwable);

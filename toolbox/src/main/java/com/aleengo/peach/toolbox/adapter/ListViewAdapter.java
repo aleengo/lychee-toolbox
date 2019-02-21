@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.aleengo.peach.toolbox.utils.Helper;
+
 import java.util.List;
 
 import androidx.annotation.LayoutRes;
@@ -65,7 +67,7 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
 
         VH viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(getLayoutResId(), null);
+            convertView = Helper.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), null);
             viewHolder = onNewViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
