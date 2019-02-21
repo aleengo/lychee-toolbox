@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class HTTPService {
 
     private static final int MAX_POOL_SIZE = 2;
+    private static final int IDX_0 = 0;
 
     private HTTPService() {
     }
@@ -45,12 +46,12 @@ public class HTTPService {
         return wrapper.getConfig().getCallback().getCompletableFuture();
     }
 
-    private static <T> void process(List<Future<T>> futures, OnCompleteCallback<T> callback) {
+    private static <T> void process(List<Future<T>> futures, OnCompleteCallback callback) {
 
         //System.out.println("task execution on thread (process) : " + Thread.currentThread().getName());
         // The CompletableFuture.allOf static method
         // allows to wait for completion of all of the Futures provided
-        final CompletableFuture<List<T>> response =
+        final CompletableFuture<List<T>> responseCompletableFuture =
                 CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
                         .thenApply(v -> {
                             //System.out.println("task execution on thread (process thenApply) : " + Thread.currentThread().getName());
@@ -64,20 +65,23 @@ public class HTTPService {
                                     }).collect(Collectors.toList());
                         });
 
-        response.whenComplete((results, throwable) -> {
-            //System.out.println("task execution on thread (whenComplete) : " + Thread.currentThread().getName());
+        responseCompletableFuture.whenComplete((results, throwable) -> {
             if (throwable != null) {
-                response.completeExceptionally(throwable);
-                callback.onComplete(new Response<>(results, throwable));
+                responseCompletableFuture.completeExceptionally(throwable);
+                callback.onComplete(new Response(results, throwable));
+            } else {
+                if (results.size() == 1) {
+                    callback.onComplete(new Response(results.get(IDX_0), null));
+                } else {
+                    callback.onComplete(new Response(results, null));
+                }
             }
-            callback.onComplete(new Response<>(results, throwable));
         });
     }
 
     private static ExecutorService getService() {
         return LazyHolder.INSTANCE;
     }
-
 
     private static class LazyHolder {
         private static final ExecutorService INSTANCE = Executors.newFixedThreadPool(MAX_POOL_SIZE);

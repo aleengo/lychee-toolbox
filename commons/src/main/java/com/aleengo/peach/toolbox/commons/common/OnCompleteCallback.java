@@ -1,6 +1,6 @@
 package com.aleengo.peach.toolbox.commons.common;
 
 @FunctionalInterface
-public interface OnCompleteCallback<E> {
-    void onComplete(Response<E> response);
+public interface OnCompleteCallback {
+    void onComplete(Response response);
 }
