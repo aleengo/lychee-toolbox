@@ -1,5 +1,7 @@
 package com.aleengo.peach.toolbox.commons.net;
 
+import com.aleengo.peach.toolbox.commons.factory.Singleton;
+
 import lombok.Getter;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
@@ -15,7 +17,7 @@ import okhttp3.Request;
 
 public final class RequestWrapper {
 
-    private static final OkHttpClient DEFAULT_CLIENT = OkHttpSingleton.getInstance().getClient();
+    private static final OkHttpClient DEFAULT_CLIENT = Singleton.of(HttpClient.class).get();
 
     @Getter
     private OkHttpClient client;
@@ -150,7 +152,7 @@ public final class RequestWrapper {
         private RequestConfig config;
 
         public Builder() {
-            client = OkHttpSingleton.getInstance().getClient();
+            client = HttpClient.getInstance().getClient();
         }
 
         public Builder(OkHttpClient client) {

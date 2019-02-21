@@ -1,6 +1,5 @@
 package com.aleengo.peach.toolbox.commons.net;
 
-import lombok.Getter;
 import okhttp3.OkHttpClient;
 
 /**
@@ -9,23 +8,26 @@ import okhttp3.OkHttpClient;
  *
  * #see https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
  */
-public class OkHttpSingleton {
+public class HttpClient {
 
-    @Getter
     private OkHttpClient client;
 
-    private OkHttpSingleton() {
+    private HttpClient() {
         client = new OkHttpClient.Builder()
                 .build();
     }
 
-    // Bill Pugh implementation
+    public OkHttpClient get() {
+        return client;
+    }
+
+   /* // Bill Pugh implementation
     private static class LazyHolder {
-        private static final OkHttpSingleton INSTANCE = new OkHttpSingleton();
+        private static final HttpClient INSTANCE = new HttpClient();
     }
 
-
-    public static OkHttpSingleton getInstance() {
+    public static HttpClient getInstance() {
         return LazyHolder.INSTANCE;
-    }
+    }*/
+
 }

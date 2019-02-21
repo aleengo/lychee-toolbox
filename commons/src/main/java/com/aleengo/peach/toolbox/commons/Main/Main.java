@@ -15,7 +15,7 @@ public class Main {
         String host = "";
         InetAddress address = Inet4Address.getByName(host);
 
-        final OkHttpClient client = OkHttpSingleton.getInstance().getClient()
+        final OkHttpClient client = HttpClient.of().getClient()
                 .newBuilder()
                 //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(address, 2800)))
                 .build();
@@ -70,5 +70,52 @@ public class Main {
             }
             ((List<String>)response.getValue()).forEach(System.out::println);
         });*//*
+    }*/
+
+   /* public static void main(String[] args) {
+
+        *//*ExecutorService service = Executors.newFixedThreadPool(2);
+        Future<DefaultCallback> f1 = service.submit(() -> {
+            System.out.println("Thread f1 : " + Thread.currentThread().getName());
+            return Singleton.of(DefaultCallback.class);
+        });
+        Future<DefaultCallback> f2 = service.submit(() -> {
+            System.out.println("Thread f2 : " + Thread.currentThread().getName());
+            return Singleton.of(DefaultCallback.class);
+        } );
+        Future<DefaultCallback> f3 = service.submit(() -> {
+            System.out.println("Thread f3: " + Thread.currentThread().getName());
+            return Singleton.of(DefaultCallback.class);
+        } );
+
+        *//**//*DefaultCallback callback = Singleton.of(DefaultCallback.class);
+        DefaultCallback callback2 = Singleton.of(DefaultCallback.class);*//**//*
+
+        while (true) {
+            if (f1.isDone() && f2.isDone() && f3.isDone()) {
+
+                try {
+                    DefaultCallback callback = f1.get();
+                    DefaultCallback callback2 = f2.get();
+                    DefaultCallback callback3 = f3.get();
+
+                    int hash1 = callback.hashCode();
+                    int hash2 = callback2.hashCode();
+                    int hash3 = callback3.hashCode();
+                    System.out.println(hash1 == hash2 ? "Yay" : "Nay");
+                    break;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        service.shutdown();
+*//*
+
+        final SingletonTest singletonTest = Singleton.of(SingletonTest.class);
+        singletonTest.print(" Hello Singleton!!!");
+
     }*/
 }
