@@ -16,6 +16,9 @@ dependencies {
 
     // okhttp
     implementation deps.okhttp.runtime
+
+    // junit
+    implementation deps.junit
 }
 
 task sourcesJar(type: Jar) {
