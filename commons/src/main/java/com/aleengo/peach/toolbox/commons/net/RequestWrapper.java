@@ -38,57 +38,6 @@ public final class RequestWrapper {
         this.request = buildRequest();
     }
 
-    /*public void get(final String endPoint, Callback callback) {
-
-        final RequestConfig config = new RequestConfig.Builder()
-                .method(GET_METHOD).endPoint(endPoint)
-                .callback(callback)
-                .build();
-        execute(config);
-    }
-
-    public void post(final String endPoint, RequestBody requestBody, Callback callback) {
-
-        final RequestConfig config = new RequestConfig.Builder()
-                .method(POST_METHOD).endPoint(endPoint)
-                .requestBody(requestBody)
-                .callback(callback)
-                .build();
-        execute(config);
-    }
-
-    public void put(final String endPoint, final RequestBody requestBody, final Callback callback) {
-
-        final RequestConfig config = new RequestConfig.Builder()
-                .method(PUT_METHOD).endPoint(endPoint)
-                .requestBody(requestBody)
-                .callback(callback)
-                .build();
-        execute(config);
-    }
-
-    public void delete(final String endPoint, final RequestBody requestBody, final Callback callback) {
-
-        final RequestConfig config = new RequestConfig.Builder()
-                .method(DELETE_METHOD).endPoint(endPoint)
-                .requestBody(requestBody)
-                .callback(callback)
-                .build();
-        execute(config);
-    }*/
-
-    /**
-     * Get a request with default configurations.
-     * @return A {@link RequestWrapper} object
-     */
-    /*public static RequestWrapper getDefault() {
-        return new RequestWrapper.Builder().build();
-    }*/
-
-   /* public Builder newBuilder() {
-        return new Builder(this);
-    }*/
-
     public void execute() {
         final Call call = client.newCall(this.request);
         call.enqueue(config.getCallback());
@@ -112,12 +61,12 @@ public final class RequestWrapper {
 
         final Request.Builder builder = new Request.Builder()
                 .url(_url.toString())
-                .method(config.getMethod().get(), config.getRequestBody());
+                .method(config.getMethod(), config.getRequestBody());
 
         Request currentRequest = builder.build();
 
         if (config.getRequestBuilder() != null) {
-            Request newRequest = config.getRequestBuilder().build();
+            final Request newRequest = config.getRequestBuilder().build();
             if (newRequest.url() == null) {
                 config.getRequestBuilder().url(currentRequest.url());
             }
@@ -127,55 +76,6 @@ public final class RequestWrapper {
             }
             currentRequest = config.getRequestBuilder().build();
         }
-
         return currentRequest;
     }
-
-
-    public enum Method {
-        GET("GET"),
-        POST("POST"),
-        PUT("DELETE"),
-        DELETE("DELETE");
-
-        private String method;
-        Method(String method) {
-            this.method = method;
-        }
-        public String get() {
-            return method;
-        }
-    }
-
-/*    public static class Builder {
-        private OkHttpClient client;
-        private RequestConfig config;
-
-        public Builder() {
-            client = HttpClient.getInstance().getClient();
-        }
-
-        public Builder(OkHttpClient client) {
-            this.client = client;
-        }
-
-        public Builder(RequestWrapper request) {
-            this.client = request.client;
-            this.config = request.config;
-        }
-
-        public Builder client(OkHttpClient client) {
-            this.client = client;
-            return this;
-        }
-
-        public Builder requestConfig(RequestConfig config) {
-            this.config = config;
-            return this;
-        }
-
-        public RequestWrapper build() {
-            return new RequestWrapper(this);
-        }
-    }*/
 }

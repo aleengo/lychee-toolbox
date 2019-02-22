@@ -111,14 +111,14 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
     protected abstract VH onNewViewHolder(View view);
 
     /**
-     * Called by BaseAdapter to display the data at the specified position. This method should
+     * Called by BaseAdapter to display the items at the specified position. This method should
      * update the contents of the {@link ListViewAdapter.ViewHolder#itemView} to reflect
      * the item at the given position.
      * <p>
      *
      * @param holder The ViewHolder which should be updated to represent the contents of the
-     *        item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
+     *        item at the given position in the items set.
+     * @param position The position of the item within the adapter's items set.
      */
     protected abstract void onBindViewHolder(VH holder, int position);
 

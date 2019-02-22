@@ -1,6 +1,6 @@
 package com.aleengo.peach.toolbox.commons.net;
 
-import com.aleengo.peach.toolbox.commons.concurrent.DefaultCallback;
+import com.aleengo.peach.toolbox.commons.concurrent.ResponseCallback;
 
 import lombok.Getter;
 import okhttp3.Request;
@@ -13,7 +13,7 @@ import okhttp3.RequestBody;
 public final class RequestConfig {
 
     @Getter
-    private RequestWrapper.Method method;
+    private String method;
     @Getter
     private String endPoint;
     @Getter
@@ -23,7 +23,7 @@ public final class RequestConfig {
     @Getter
     private Request.Builder requestBuilder;
     @Getter
-    private DefaultCallback callback;
+    private ResponseCallback callback;
 
     private RequestConfig(Builder builder) {
         this.method = builder.method;
@@ -39,18 +39,18 @@ public final class RequestConfig {
     }
 
     public static class Builder {
-        private RequestWrapper.Method method;
+        private String method;
         private String endPoint;
         private String baseUrl;
         private RequestBody requestBody;
         private Request.Builder requestBuilder;
-        private DefaultCallback callback;
+        private ResponseCallback callback;
 
-        public Builder(DefaultCallback callback) {
-            this(RequestWrapper.Method.GET, callback);
+        public Builder(ResponseCallback callback) {
+            this(RequestMethod.GET, callback);
         }
 
-        public Builder(RequestWrapper.Method method, DefaultCallback callback) {
+        public Builder(String method, ResponseCallback callback) {
             this.method = method;
             this.callback = callback;
         }
@@ -64,7 +64,7 @@ public final class RequestConfig {
             this.callback = config.callback;
         }
 
-        public Builder method(RequestWrapper.Method method) {
+        public Builder method(String method) {
             this.method = method;
             return this;
         }
@@ -94,7 +94,7 @@ public final class RequestConfig {
             return this;
         }
 
-        public Builder callback(DefaultCallback callback) {
+        public Builder callback(ResponseCallback callback) {
             this.callback = callback;
             return this;
         }

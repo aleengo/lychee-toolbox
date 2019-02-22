@@ -13,7 +13,7 @@ public final class ClassUtil {
     private ClassUtil() {
     }
 
-    // call default contstructor
+    // call default constructor
     public static Object newInstance(final String className) {
         try {
             final Class clazz = Class.forName(className);
@@ -24,7 +24,7 @@ public final class ClassUtil {
         }
     }
 
-    // call default contstructor
+    // call default constructor
     public static Object newInstance(Class<?> clazz)
             throws NoSuchMethodException, IllegalAccessException,
             InstantiationException, InvocationTargetException {

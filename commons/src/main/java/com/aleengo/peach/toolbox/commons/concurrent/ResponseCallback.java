@@ -13,12 +13,12 @@ import okhttp3.Response;
  * Created by CK_ALEENGO on 18/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public class DefaultCallback implements Callback {
+public class ResponseCallback implements Callback {
 
     @Getter
     private final CompletableFuture<String> completableFuture;
 
-    public DefaultCallback() {
+    public ResponseCallback() {
         this.completableFuture = new CompletableFuture<>();
     }
 

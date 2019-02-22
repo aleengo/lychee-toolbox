@@ -17,6 +17,9 @@ dependencies {
     // okhttp
     implementation deps.okhttp.runtime
 
+    // gson
+    implementation deps.gson
+
     // junit
     implementation deps.junit
 }

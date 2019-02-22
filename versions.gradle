@@ -38,6 +38,7 @@ versions.espresso = "3.1.2-alpha01"
 versions.lombok = "1.16.20"
 versions.okhttp = "3.12.0"
 versions.butterknife = "10.0.0"
+versions.gson = "2.8.5"
 
 def build_versions = [:]
 build_versions.min_sdk = 15
@@ -51,6 +52,7 @@ deps.android_maven_gradle_plugin = "com.github.dcendents:android-maven-gradle-pl
 deps.junit = "junit:junit:$versions.junit"
 deps.android_test_runner = "androidx.test:runner:$versions.test_runner"
 deps.lombok = "org.projectlombok:lombok:$versions.lombok"
+deps.gson = "com.google.code.gson:gson:$versions.gson"
 
 def butterknife = [:]
 butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"

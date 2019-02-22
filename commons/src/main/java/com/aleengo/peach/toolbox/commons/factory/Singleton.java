@@ -14,25 +14,19 @@ public final class Singleton {
 
     private static Object instance;
 
-    private static class LazyHolder {
-        private static final Object INSTANCE = instance;
-    }
-
     public static <T> T of(Class<T> cls) {
         if (instance == null) {
-            instance = ISingleton.newInstance(cls);
-        }
-        return (T) LazyHolder.INSTANCE;
-    }
-
-    interface ISingleton {
-        static Object newInstance(Class<?> cls) {
             try {
-                return ClassUtil.newInstance(cls);
+                instance = ClassUtil.newInstance(cls);
             } catch (NoSuchMethodException | IllegalAccessException |
                     InstantiationException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
         }
+        return (T) LazyHolder.INSTANCE;
+    }
+
+    private static class LazyHolder {
+        private static final Object INSTANCE = instance;
     }
 }

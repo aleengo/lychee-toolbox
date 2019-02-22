@@ -31,6 +31,7 @@ public class SingletonTest {
         final SingletonTest singletonTest = Singleton.of(SingletonTest.class);
         final SingletonTest singletonTest2 = Singleton.of(SingletonTest.class);
 
-        Assert.assertTrue("Object are not equals", singletonTest.hashCode() == singletonTest2.hashCode());
+        Assert.assertTrue("Object are not equals",
+                singletonTest.hashCode() == singletonTest2.hashCode());
     }
 }

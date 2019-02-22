@@ -1,4 +1,4 @@
-package com.aleengo.peach.toolbox.commons.common;
+package com.aleengo.peach.toolbox.commons.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

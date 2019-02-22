@@ -1,7 +1,7 @@
 package com.aleengo.peach.toolbox.commons.concurrent;
 
 import com.aleengo.peach.toolbox.commons.common.OnCompleteCallback;
-import com.aleengo.peach.toolbox.commons.common.Response;
+import com.aleengo.peach.toolbox.commons.model.Response;
 import com.aleengo.peach.toolbox.commons.net.RequestWrapper;
 
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 public class HTTPService {
 
     private static final int MAX_POOL_SIZE = 2;
-    private static final int IDX_0 = 0;
 
     private HTTPService() {
     }
@@ -71,7 +70,7 @@ public class HTTPService {
                 callback.onComplete(new Response(results, throwable));
             } else {
                 if (results.size() == 1) {
-                    callback.onComplete(new Response(results.get(IDX_0), null));
+                    callback.onComplete(new Response(results.get(0), null));
                 } else {
                     callback.onComplete(new Response(results, null));
                 }
