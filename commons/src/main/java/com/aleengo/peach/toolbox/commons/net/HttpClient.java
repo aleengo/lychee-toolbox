@@ -21,13 +21,13 @@ public class HttpClient {
         return client;
     }
 
-   /* // Bill Pugh implementation
+    // Bill Pugh implementation
     private static class LazyHolder {
         private static final HttpClient INSTANCE = new HttpClient();
     }
 
     public static HttpClient getInstance() {
         return LazyHolder.INSTANCE;
-    }*/
+    }
 
 }

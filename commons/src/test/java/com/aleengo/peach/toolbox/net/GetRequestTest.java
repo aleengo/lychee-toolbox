@@ -50,10 +50,11 @@ public class GetRequestTest {
     public static void setup() throws UnknownHostException {
         String host = "";
         InetAddress address = Inet4Address.getByName(host);
-        client = Singleton.of(HttpClient.class).get()
+        client = HttpClient.getInstance().get();
+        /*Singleton.of(HttpClient.class).get()
                 .newBuilder()
                 //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(address, 2800)))
-                .build();
+                .build();*/
 
         latestConfig = new RequestConfig.Builder(new ResponseCallback())
                         .baseUrl(BASE_URL)
