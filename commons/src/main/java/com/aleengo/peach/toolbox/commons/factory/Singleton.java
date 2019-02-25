@@ -12,21 +12,25 @@ public final class Singleton {
 
     private Singleton() {}
 
-    private static Object instance;
-
-    public static <T> T of(Class<T> cls) {
+    public static <T> T of(Class<T> cls, T instance) {
         if (instance == null) {
+            synchronized (cls) {
+                if (instance == null) {
+                    instance = (T) Singleton.ISingleton.instance(cls);
+                }
+            }
+        }
+        return instance;
+    }
+
+    interface ISingleton {
+        static Object instance(Class cls) {
             try {
-                instance = ClassUtil.newInstance(cls);
+                return ClassUtil.newInstance(cls);
             } catch (NoSuchMethodException | IllegalAccessException |
                     InstantiationException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
         }
-        return (T) LazyHolder.INSTANCE;
-    }
-
-    private static class LazyHolder {
-        private static final Object INSTANCE = instance;
     }
 }
