@@ -17,7 +17,7 @@ import okhttp3.Request;
 
 public final class RequestWrapper {
 
-    private static final OkHttpClient DEFAULT_CLIENT = Singleton.of(HttpClient.class).get();
+    private static final OkHttpClient DEFAULT_CLIENT = HttpClient.getInstance().get();
 
     @Getter
     private OkHttpClient client;
