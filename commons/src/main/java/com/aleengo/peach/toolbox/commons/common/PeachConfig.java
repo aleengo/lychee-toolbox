@@ -1,4 +1,4 @@
-package com.aleengo.peach.toolbox.common;
+package com.aleengo.peach.toolbox.commons.common;
 
 import lombok.Getter;
 import lombok.Setter;

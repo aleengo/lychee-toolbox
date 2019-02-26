@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
  */
 public class HTTPService {
 
+    private static final String HTTP_SERVICE_LABEL = "PeachToolbox HTTPService";
     private static final int MAX_POOL_SIZE = 4;
 
     private HTTPService() {
@@ -91,7 +92,8 @@ public class HTTPService {
     }
 
     private static class LazyHolder {
-        private static final ExecutorService INSTANCE = Executors.newFixedThreadPool(MAX_POOL_SIZE,
-                Utils.threadFactory("PeachToolbox HTTPService", false));
+        private static final ExecutorService INSTANCE =
+                Executors.newFixedThreadPool(MAX_POOL_SIZE,
+                        Utils.threadFactory(HTTP_SERVICE_LABEL));
     }
 }

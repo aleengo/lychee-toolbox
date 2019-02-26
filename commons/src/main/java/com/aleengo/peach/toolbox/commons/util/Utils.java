@@ -1,5 +1,7 @@
 package com.aleengo.peach.toolbox.commons.util;
 
+import com.aleengo.peach.toolbox.commons.concurrent.PeachDefaultThreadFactory;
+
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -11,14 +13,11 @@ public class Utils {
     private Utils() {
     }
 
-    public static ThreadFactory threadFactory(String name, boolean deamon) {
-        return new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable runnable) {
-                final Thread thread = new Thread(runnable, name);
-                thread.setDaemon(deamon);
-                return thread;
-            }
-        };
+    public static PeachDefaultThreadFactory threadFactory(String label, boolean deamon) {
+        return new PeachDefaultThreadFactory(label, deamon);
+    }
+
+    public static PeachDefaultThreadFactory threadFactory(String label) {
+        return new PeachDefaultThreadFactory(label, false);
     }
 }
