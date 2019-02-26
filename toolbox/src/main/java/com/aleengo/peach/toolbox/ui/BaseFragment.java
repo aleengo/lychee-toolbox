@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.aleengo.peach.toolbox.common.PeachConfig;
+import com.aleengo.peach.toolbox.commons.common.PeachConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

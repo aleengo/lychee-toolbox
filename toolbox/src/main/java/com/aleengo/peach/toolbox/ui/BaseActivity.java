@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.aleengo.peach.toolbox.common.PeachConfig;
+import com.aleengo.peach.toolbox.commons.common.PeachConfig;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
