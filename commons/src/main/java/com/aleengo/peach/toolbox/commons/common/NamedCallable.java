@@ -5,8 +5,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by CK_ALEENGO on 26/02/2019.
  * Copyright (c) 2019. All rights reserved.
- */
-/**
+ *
  * Callable implementation which always sets its thread name.
  */
 public abstract class NamedCallable<V> implements Callable<V> {

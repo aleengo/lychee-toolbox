@@ -3,13 +3,13 @@ package com.aleengo.peach.toolbox.commons.common;
 /**
  * Created by CK_ALEENGO on 26/02/2019.
  * Copyright (c) 2019. All rights reserved.
- */
-/**
+ *
  * Runnable implementation which always sets its thread name.
  */
 public abstract class NamedRunnable implements Runnable {
 
     protected final String name;
+
     public NamedRunnable(String format, Object... args) {
         this.name = String.format(format, args);
     }
@@ -24,5 +24,6 @@ public abstract class NamedRunnable implements Runnable {
             Thread.currentThread().setName(oldName);
         }
     }
+
     protected abstract void execute();
 }
