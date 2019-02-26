@@ -3,6 +3,7 @@ package com.aleengo.peach.toolbox.commons.concurrent;
 import com.aleengo.peach.toolbox.commons.common.OnCompleteCallback;
 import com.aleengo.peach.toolbox.commons.model.Response;
 import com.aleengo.peach.toolbox.commons.net.RequestWrapper;
+import com.aleengo.peach.toolbox.commons.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class HTTPService {
 
-    private static final int MAX_POOL_SIZE = 2;
+    private static final int MAX_POOL_SIZE = 4;
 
     private HTTPService() {
     }
@@ -34,7 +35,7 @@ public class HTTPService {
         final List<Future<String>> futures = new ArrayList<>();
         requests.forEach(wrapper -> futures.add(_execute(wrapper)));
         // shutdown the service
-        getService().shutdown();
+        //getService().shutdown();
 
         process(futures, callback);
     }
@@ -83,6 +84,7 @@ public class HTTPService {
     }
 
     private static class LazyHolder {
-        private static final ExecutorService INSTANCE = Executors.newFixedThreadPool(MAX_POOL_SIZE);
+        private static final ExecutorService INSTANCE = Executors.newFixedThreadPool(MAX_POOL_SIZE,
+                Utils.threadFactory("PeachToolbox HTTPService", false));
     }
 }
