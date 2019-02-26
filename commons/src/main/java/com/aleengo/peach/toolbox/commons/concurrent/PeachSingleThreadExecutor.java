@@ -4,9 +4,9 @@ import com.aleengo.peach.toolbox.commons.util.Utils;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by CK_ALEENGO on 26/02/2019.
@@ -15,14 +15,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class PeachSingleThreadExecutor implements PeachExecutor {
 
     private static final String POOL_NAME = "PeachSinglePool";
-    private ThreadPoolExecutor mSingleThreadExecutor;
+    private ExecutorService mSingleThreadExecutor;
 
     public PeachSingleThreadExecutor() {
         this(POOL_NAME);
     }
 
     public PeachSingleThreadExecutor(String poolName) {
-        this.mSingleThreadExecutor = (ThreadPoolExecutor)
+        this.mSingleThreadExecutor =
                 Executors.newSingleThreadExecutor(Utils.defaultThreadFactory(poolName));
     }
 
