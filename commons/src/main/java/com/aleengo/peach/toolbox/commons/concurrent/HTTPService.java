@@ -7,7 +7,9 @@ import com.aleengo.peach.toolbox.commons.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -32,8 +34,8 @@ public class HTTPService {
 
     // execute a list of requests
     public static void execute(List<RequestWrapper> requests, OnCompleteCallback callback) {
-        final List<Future<String>> futures = new ArrayList<>();
-        requests.forEach(wrapper -> futures.add(_execute(wrapper)));
+        final Map<String, Future<String>> futures = new LinkedHashMap<>();
+        requests.forEach(wrapper -> futures.put(wrapper.getName(), _execute(wrapper)));
         // shutdown the service
         //getService().shutdown();
 
@@ -46,24 +48,24 @@ public class HTTPService {
         return wrapper.getConfig().getCallback().getCompletableFuture();
     }
 
-    private static <T> void process(List<Future<T>> futures, OnCompleteCallback callback) {
+    private static <T> void process(Map<String, Future<T>> futures, OnCompleteCallback callback) {
 
         //System.out.println("task execution on thread (process) : " + Thread.currentThread().getName());
         // The CompletableFuture.allOf static method
         // allows to wait for completion of all of the Futures provided
-        final CompletableFuture<List<T>> responseCompletableFuture =
-                CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
+        final CompletableFuture<Map<String, T>> responseCompletableFuture =
+                CompletableFuture.allOf(futures.values().toArray(new CompletableFuture[futures.size()]))
                         .thenApply(v -> {
                             //System.out.println("task execution on thread (process thenApply) : " + Thread.currentThread().getName());
-                            return futures.stream()
-                                    .map(future -> {
+                            return futures.keySet().stream()
+                                    .collect(Collectors.toMap(key -> key, key -> {
                                         try {
-                                            return future.get();
+                                            return futures.get(key).get();
                                         } catch (InterruptedException | ExecutionException e) {
                                             throw new RuntimeException(e);
                                         }
-                                    }).collect(Collectors.toList());
-                        });
+                                    }));
+                            });
 
         responseCompletableFuture.whenComplete((results, throwable) -> {
             if (throwable != null) {
@@ -71,7 +73,12 @@ public class HTTPService {
                 callback.onComplete(new Response(results, throwable));
             } else {
                 if (results.size() == 1) {
-                    callback.onComplete(new Response(results.get(0), null));
+                    final Response response = new Response();
+                    results.keySet().forEach(s -> {
+                        response.setError(null);
+                        response.setValue(results.get(s));
+                    });
+                    callback.onComplete(response);
                 } else {
                     callback.onComplete(new Response(results, null));
                 }

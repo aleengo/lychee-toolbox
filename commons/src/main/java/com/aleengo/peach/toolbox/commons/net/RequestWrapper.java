@@ -3,6 +3,7 @@ package com.aleengo.peach.toolbox.commons.net;
 import com.aleengo.peach.toolbox.commons.factory.Singleton;
 
 import lombok.Getter;
+import lombok.Setter;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -19,6 +20,8 @@ public final class RequestWrapper {
 
     private static final OkHttpClient DEFAULT_CLIENT = HttpClient.getInstance().get();
 
+    @Getter @Setter
+    private String name;
     @Getter
     private OkHttpClient client;
     @Getter
@@ -27,11 +30,12 @@ public final class RequestWrapper {
     @Getter
     private Request request;
 
-    public RequestWrapper(RequestConfig config) {
-        this(DEFAULT_CLIENT, config);
+    public RequestWrapper(String name, RequestConfig config) {
+        this(name, DEFAULT_CLIENT, config);
     }
 
-    public RequestWrapper(OkHttpClient client, RequestConfig config) {
+    public RequestWrapper(String name, OkHttpClient client, RequestConfig config) {
+        this.name = name;
         this.client = client;
         this.config = config;
 
