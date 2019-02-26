@@ -7,7 +7,6 @@ import java.util.concurrent.Executor;
  * Created by CK_ALEENGO on 26/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-@FunctionalInterface
 public interface PeachExecutor extends Executor {
     /**
      * Executes the given command at some time in the future.  The command
