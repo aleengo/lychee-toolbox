@@ -1,2 +1,2 @@
 # peach-toolbox
-Personal dev toolbox for Android
+Personal dev toolbox
