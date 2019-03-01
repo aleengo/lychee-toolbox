@@ -3,17 +3,13 @@ package com.aleengo.peach.toolbox.commons.concurrent;
 import com.aleengo.peach.toolbox.commons.common.OnCompleteCallback;
 import com.aleengo.peach.toolbox.commons.model.Response;
 import com.aleengo.peach.toolbox.commons.net.RequestWrapper;
-import com.aleengo.peach.toolbox.commons.util.Utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -23,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public class HTTPService {
 
-    private static final String HTTP_SERVICE_LABEL = "PeachToolbox HTTPService";
+    private static final String HTTP_SERVICE_NAME = "PeachHTTPService";
     private static final int MAX_POOL_SIZE = 4;
 
     private HTTPService() {
@@ -45,7 +41,7 @@ public class HTTPService {
 
     private static Future<String> _execute(RequestWrapper wrapper) {
         final Runnable task = wrapper::execute;
-        getService().submit(task);
+        getService().execute(task);
         return wrapper.getConfig().getCallback().getCompletableFuture();
     }
 
@@ -75,9 +71,9 @@ public class HTTPService {
             } else {
                 if (results.size() == 1) {
                     final Response response = new Response();
-                    results.keySet().forEach(s -> {
+                    results.keySet().forEach(key -> {
                         response.setError(null);
-                        response.setValue(results.get(s));
+                        response.setValue(results.get(key));
                     });
                     callback.onComplete(response);
                 } else {
@@ -87,13 +83,12 @@ public class HTTPService {
         });
     }
 
-    private static ExecutorService getService() {
+    private static PeachFixedThreadExecutor getService() {
         return LazyHolder.INSTANCE;
     }
 
     private static class LazyHolder {
-        private static final ExecutorService INSTANCE =
-                Executors.newFixedThreadPool(MAX_POOL_SIZE,
-                        Utils.threadFactory(HTTP_SERVICE_LABEL));
+        private static final PeachFixedThreadExecutor INSTANCE =
+                new PeachFixedThreadExecutor(HTTP_SERVICE_NAME, MAX_POOL_SIZE);
     }
 }

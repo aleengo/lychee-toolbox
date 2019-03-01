@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by CK_ALEENGO on 26/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public class PeachDefaultThreadFactory implements ThreadFactory {
+public final class PeachDefaultThreadFactory implements ThreadFactory {
 
     private static final AtomicInteger poolNumber = new AtomicInteger(1);
     private final ThreadGroup group;
@@ -16,13 +16,11 @@ public class PeachDefaultThreadFactory implements ThreadFactory {
 
     private boolean deamon;
 
-    public PeachDefaultThreadFactory(String label, boolean deamon) {
+    public PeachDefaultThreadFactory(String poolName, boolean deamon) {
         SecurityManager s = System.getSecurityManager();
         group = (s != null) ? s.getThreadGroup() :
                 Thread.currentThread().getThreadGroup();
-        namePrefix = label + "[pool-" +
-                poolNumber.getAndIncrement() +
-                "-thread-";
+        namePrefix = poolName + " [pool-" + poolNumber.getAndIncrement() + "-thread-";
         this.deamon = deamon;
     }
 
