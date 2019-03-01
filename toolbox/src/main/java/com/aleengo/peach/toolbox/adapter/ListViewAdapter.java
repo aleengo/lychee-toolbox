@@ -91,6 +91,18 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
         }
     }
 
+    public boolean removeItem(E item) {
+        final boolean removed = items.remove(item);
+        notifyDataSetChanged();
+        return removed;
+    }
+
+    public E removeItem(int position) {
+        final E item = items.remove(position);
+        notifyDataSetChanged();
+        return item;
+    }
+
     protected abstract @LayoutRes int getLayoutResId();
 
     /**
