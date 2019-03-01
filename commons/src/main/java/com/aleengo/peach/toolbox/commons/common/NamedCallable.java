@@ -13,6 +13,14 @@ public abstract class NamedCallable<V> implements Callable<V> {
 
     private final String name;
 
+    public NamedCallable() {
+        this("");
+    }
+
+    public NamedCallable(String name) {
+        this("%s", name);
+    }
+
     public NamedCallable(String format, Object... args) {
         this.name = String.format(format, args);
     }

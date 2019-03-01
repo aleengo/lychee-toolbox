@@ -10,6 +10,15 @@ package com.aleengo.peach.toolbox.commons.common;
 public abstract class NamedRunnable implements Runnable {
 
     protected final String name;
+
+    public NamedRunnable() {
+        this("");
+    }
+
+    public NamedRunnable(String name) {
+        this("%s", name);
+    }
+
     public NamedRunnable(String format, Object... args) {
         this.name = String.format(format, args);
     }
