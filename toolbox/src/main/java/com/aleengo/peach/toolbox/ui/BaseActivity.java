@@ -51,31 +51,31 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onStart().");
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onResume().");
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onPause().");
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: OnStop().");
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onDestroy().");
     }
