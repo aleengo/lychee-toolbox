@@ -24,7 +24,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onCreate() method called");
+
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onCreate() method called");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "DaggerConfiguration.");
+        daggerConfiguration();
 
         View view;
         if (getLayoutView() != null) {
@@ -44,43 +47,43 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onAttachFragment() = " + fragment.toString());
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onAttachFragment() = " + fragment.toString());
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onStart().");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onStart().");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onResume().");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onResume().");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onPause().");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onPause().");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: OnStop().");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: OnStop().");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onDestroy().");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onDestroy().");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (PeachConfig.isDebug()) Log.d(getClassName(), "EVENT: onActivityResult().");
+        if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onActivityResult().");
     }
 
     /**

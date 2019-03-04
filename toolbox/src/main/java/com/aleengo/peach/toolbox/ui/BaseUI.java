@@ -16,14 +16,13 @@ public interface BaseUI {
      * when using {@link android.util.Log} util
      * @return
      */
-    String getClassName();
+    String logTag();
 
     /**
      * Return a layout resource ID
      * @return
      */
-    default @LayoutRes
-    int getLayoutResId() {
+    default @LayoutRes int getLayoutResId() {
         return View.NO_ID;
     }
 
@@ -34,4 +33,9 @@ public interface BaseUI {
     default View getLayoutView() {
         return null;
     }
+
+    /**
+     * Dagger configuration
+     */
+    void daggerConfiguration();
 }
