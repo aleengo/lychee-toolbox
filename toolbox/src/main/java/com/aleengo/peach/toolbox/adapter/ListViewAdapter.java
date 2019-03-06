@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.aleengo.peach.toolbox.utils.Helper;
+import com.aleengo.peach.toolbox.utils.Util;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ import lombok.Getter;
  * Created by CK_ALEENGO on 15/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> extends BaseAdapter {
+public abstract class ListViewAdapter<E, VIEW extends ItemView<E>> extends BaseAdapter {
 
     /**
      * ViewHolder Class
      */
-    public static class ViewHolder {
+   /* public static class ViewHolder {
         private View itemView;
         public ViewHolder(View itemView) {
             if (itemView == null) {
@@ -30,7 +30,7 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
             }
             this.itemView = itemView;
         }
-    }
+    }*/
 
     public static final long NO_ITEM_ID = -1;
     private Context mContext;
@@ -65,16 +65,16 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        VH viewHolder;
+        VIEW customView = null;
         if (convertView == null) {
-            convertView = Helper.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), null);
-            viewHolder = onNewViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (VH) convertView.getTag();
-        }
-        onBindViewHolder(viewHolder, position);
-        return convertView;
+            customView = (VIEW) Util.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), null);
+            //viewHolder = onNewViewHolder(convertView);
+            //convertView.setTag(viewHolder);
+        } //else {
+            //viewHolder = (VH) convertView.getTag();
+        //}
+        customView.bind((E) getItem(position));
+        return (View) customView;
     }
 
     public void clear() {
@@ -120,7 +120,7 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
      *
      * @return A new ViewHolder that holds a View of the given view type.
      */
-    protected abstract VH onNewViewHolder(View view);
+    //protected abstract VH onNewViewHolder(View view);
 
     /**
      * Called by BaseAdapter to display the items at the specified position. This method should
@@ -132,6 +132,6 @@ public abstract class ListViewAdapter<E, VH extends ListViewAdapter.ViewHolder> 
      *        item at the given position in the items set.
      * @param position The position of the item within the adapter's items set.
      */
-    protected abstract void onBindViewHolder(VH holder, int position);
+    //protected abstract void onBindViewHolder(VH holder, int position);
 
 }

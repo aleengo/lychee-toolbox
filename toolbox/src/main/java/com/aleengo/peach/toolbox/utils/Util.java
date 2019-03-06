@@ -25,9 +25,9 @@ import androidx.fragment.app.FragmentTransaction;
  * Created by CK_ALEENGO on 20/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public final class Helper {
+public final class Util {
 
-    private Helper() {
+    private Util() {
     }
 
     /*enum ToastLength {

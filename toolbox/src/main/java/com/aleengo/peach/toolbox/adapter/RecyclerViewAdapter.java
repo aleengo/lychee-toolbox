@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.aleengo.peach.toolbox.utils.Helper;
+import com.aleengo.peach.toolbox.utils.Util;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public abstract class RecyclerViewAdapter<E, VH extends RecyclerViewAdapter.View
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final View view = Helper.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), parent);
+        final View view = Util.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), parent);
         return onNewViewHolder(view);
     }
 
