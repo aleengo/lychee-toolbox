@@ -17,7 +17,7 @@ import lombok.Getter;
  * Created by CK_ALEENGO on 15/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public abstract class ListViewAdapter<E, VIEW extends ItemView<E>> extends BaseAdapter {
+public abstract class ListViewAdapter<E, ITEMVIEW extends com.aleengo.peach.toolbox.adapter.ItemView<E>> extends BaseAdapter {
 
     /**
      * ViewHolder Class
@@ -65,16 +65,13 @@ public abstract class ListViewAdapter<E, VIEW extends ItemView<E>> extends BaseA
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        VIEW customView = null;
+        ITEMVIEW itemView;
         if (convertView == null) {
-            customView = (VIEW) Util.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), null);
-            //viewHolder = onNewViewHolder(convertView);
-            //convertView.setTag(viewHolder);
-        } //else {
-            //viewHolder = (VH) convertView.getTag();
-        //}
-        customView.bind((E) getItem(position));
-        return (View) customView;
+            convertView =  Util.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), null);
+        }
+        itemView = (ITEMVIEW) convertView;
+        itemView.bind((E) getItem(position));
+        return (View) itemView;
     }
 
     public void clear() {
