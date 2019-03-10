@@ -30,9 +30,7 @@ public interface BaseUI {
      * Return a view
      * @return
      */
-    default View getLayoutView() {
-        return null;
-    }
+    View getLayoutView();
 
     /**
      * Dagger configuration

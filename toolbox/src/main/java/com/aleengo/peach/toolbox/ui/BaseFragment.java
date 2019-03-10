@@ -41,7 +41,8 @@ public abstract class BaseFragment extends Fragment implements BaseUI {
                              @Nullable Bundle savedInstanceState) {
 
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onCreateView().");
-        return inflater.inflate(getLayoutResId(), container, false);
+        //return inflater.inflate(getLayoutResId(), container, false);
+        return getLayoutView();
     }
 
     @Override

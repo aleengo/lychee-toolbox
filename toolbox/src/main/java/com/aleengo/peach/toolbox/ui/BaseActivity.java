@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-
 import com.aleengo.peach.toolbox.commons.common.PeachConfig;
 
 import androidx.annotation.Nullable;
@@ -29,18 +28,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
         if (PeachConfig.isDebug()) Log.d(logTag(), "DaggerConfiguration.");
         daggerConfiguration();
 
-        View view;
+        /*View view;
         if (getLayoutView() != null) {
             view = getLayoutView();
         } else if (getLayoutResId() != View.NO_ID) {
             view = getLayoutInflater().inflate(getLayoutResId(), null);
         } else {
             throw new RuntimeException("You may implements either getLayoutResId() or getLayoutView()");
-        }
+        }*/
 
+        final View view = getLayoutView();
         setContentView(view);
 
-        ButterKnife.bind(this);
+        ButterKnife.bind(view);
         initialize(savedInstanceState);
     }
 

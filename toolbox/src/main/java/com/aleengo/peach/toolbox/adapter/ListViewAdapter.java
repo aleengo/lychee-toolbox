@@ -1,12 +1,9 @@
 package com.aleengo.peach.toolbox.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
-import com.aleengo.peach.toolbox.utils.Util;
 
 import java.util.List;
 
@@ -17,7 +14,7 @@ import lombok.Getter;
  * Created by CK_ALEENGO on 15/02/2019.
  * Copyright (c) 2019. All rights reserved.
  */
-public abstract class ListViewAdapter<E, ITEMVIEW extends com.aleengo.peach.toolbox.adapter.ItemView<E>> extends BaseAdapter {
+public abstract class ListViewAdapter<E, ITEMVIEW extends ItemView<E>> extends BaseAdapter {
 
     /**
      * ViewHolder Class
@@ -67,7 +64,7 @@ public abstract class ListViewAdapter<E, ITEMVIEW extends com.aleengo.peach.tool
 
         ITEMVIEW itemView;
         if (convertView == null) {
-            convertView =  Util.inflateLayout(LayoutInflater.from(mContext), getLayoutResId(), null);
+            convertView = onNewViewItem();
         }
         itemView = (ITEMVIEW) convertView;
         itemView.bind((E) getItem(position));
@@ -100,7 +97,7 @@ public abstract class ListViewAdapter<E, ITEMVIEW extends com.aleengo.peach.tool
         return item;
     }
 
-    protected abstract @LayoutRes int getLayoutResId();
+    //protected abstract @LayoutRes int getLayoutResId();
 
     /**
      * Called when ListView needs a new {@link ViewHolder} of the given type to represent
@@ -117,7 +114,7 @@ public abstract class ListViewAdapter<E, ITEMVIEW extends com.aleengo.peach.tool
      *
      * @return A new ViewHolder that holds a View of the given view type.
      */
-    //protected abstract VH onNewViewHolder(View view);
+    protected abstract View onNewViewItem();
 
     /**
      * Called by BaseAdapter to display the items at the specified position. This method should
