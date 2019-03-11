@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -19,29 +20,20 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
 
+    private Unbinder unbinder;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onCreate() method called");
         if (PeachConfig.isDebug()) Log.d(logTag(), "DaggerConfiguration.");
         daggerConfiguration();
 
-        /*View view;
-        if (getLayoutView() != null) {
-            view = getLayoutView();
-        } else if (getLayoutResId() != View.NO_ID) {
-            view = getLayoutInflater().inflate(getLayoutResId(), null);
-        } else {
-            throw new RuntimeException("You may implements either getLayoutResId() or getLayoutView()");
-        }*/
-
         final View view = getLayoutView();
         setContentView(view);
 
-        ButterKnife.bind(view);
-        initialize(savedInstanceState);
+        unbinder = ButterKnife.bind(view);
     }
 
     @Override
@@ -78,6 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
     protected void onDestroy() {
         super.onDestroy();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onDestroy().");
+        unbinder.unbind();
     }
 
     @Override
@@ -85,11 +78,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
         super.onActivityResult(requestCode, resultCode, data);
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onActivityResult().");
     }
-
-    /**
-     * Performs initialization
-     *
-     * This method is called by [onCreate()] for an {@link androidx.appcompat.app.AppCompatActivity}
-     */
-    protected abstract void initialize(@Nullable Bundle savedInstanceState);
 }

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
  * Copyright (c) 2019. All rights reserved.
  */
 public abstract class BaseFragment extends Fragment implements BaseUI {
+
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,7 @@ public abstract class BaseFragment extends Fragment implements BaseUI {
         super.onViewCreated(view, savedInstanceState);
 
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onViewCreated().");
-        ButterKnife.bind(this, view);
-        initialize(view, savedInstanceState);
+        unbinder = ButterKnife.bind(view);
     }
 
     @Override
@@ -94,6 +96,7 @@ public abstract class BaseFragment extends Fragment implements BaseUI {
     public void onDestroyView() {
         super.onDestroyView();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onDestroyView().");
+        unbinder.unbind();
     }
 
     @Override
@@ -107,11 +110,4 @@ public abstract class BaseFragment extends Fragment implements BaseUI {
         super.onDetach();
         if (PeachConfig.isDebug()) Log.d(logTag(), "EVENT: onDetach().");
     }
-
-    /**
-     * Performs initialization
-     *
-     * This method is called by [onViewCreated()] for a {@link androidx.fragment.app.Fragment}
-     */
-    protected abstract void initialize(@NonNull View view, @Nullable Bundle savedInstanceState);
 }
