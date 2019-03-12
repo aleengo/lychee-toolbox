@@ -5,5 +5,5 @@ package com.aleengo.peach.toolbox.adapter;
  * Copyright (c) 2019. All rights reserved.
  */
 public interface ItemView<T> {
-    void bind(T item);
+    void bind(T item, int position);
 }

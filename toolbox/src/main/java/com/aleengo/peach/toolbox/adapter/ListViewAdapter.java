@@ -50,7 +50,7 @@ public abstract class ListViewAdapter<E, ITEMVIEW extends ItemView<E>> extends B
             convertView = onNewItemView();
         }
         itemView = (ITEMVIEW) convertView;
-        itemView.bind((E) getItem(position));
+        itemView.bind((E) getItem(position), position);
         return (View) itemView;
     }
 
