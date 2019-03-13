@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.aleengo.peach.toolbox.commons.common.Pair;
+
 import java.util.List;
 
 import lombok.Getter;
@@ -50,7 +52,7 @@ public abstract class ListViewAdapter<E, ITEMVIEW extends ItemView<E>> extends B
             convertView = onNewItemView();
         }
         itemView = (ITEMVIEW) convertView;
-        itemView.bind((E) getItem(position), position);
+        itemView.bind(Pair.of((E) getItem(position), position));
         return (View) itemView;
     }
 
