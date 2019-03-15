@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import lombok.Getter;
 
 
 /**
@@ -20,6 +21,7 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity extends AppCompatActivity implements BaseUI {
 
+    @Getter
     private Unbinder unbinder;
 
     @Override
