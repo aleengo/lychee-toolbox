@@ -1,2 +1,2 @@
-# peach-toolbox
+# peachbox
 Personal dev toolbox
