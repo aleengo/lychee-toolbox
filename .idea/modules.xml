@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/box/box.iml" filepath="$PROJECT_DIR$/box/box.iml" />
       <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/peach/peach.iml" filepath="$PROJECT_DIR$/peach/peach.iml" />
       <module fileurl="file://$PROJECT_DIR$/peach-toolbox.iml" filepath="$PROJECT_DIR$/peach-toolbox.iml" />
-      <module fileurl="file://$PROJECT_DIR$/toolbox/toolbox.iml" filepath="$PROJECT_DIR$/toolbox/toolbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/peachbox.iml" filepath="$PROJECT_DIR$/peachbox.iml" />
     </modules>
   </component>
 </project>
