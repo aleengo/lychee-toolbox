@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/peach/peach.iml" filepath="$PROJECT_DIR$/peach/peach.iml" />
       <module fileurl="file://$PROJECT_DIR$/peach-toolbox.iml" filepath="$PROJECT_DIR$/peach-toolbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/peachbox.iml" filepath="$PROJECT_DIR$/peachbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ui-adapters/ui-adapters.iml" filepath="$PROJECT_DIR$/ui-adapters/ui-adapters.iml" />
     </modules>
   </component>
 </project>

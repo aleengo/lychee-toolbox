@@ -1,0 +1,43 @@
+/*
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+def toolbox = [:]
+toolbox.version_code = 1
+toolbox.version_name = "0.1.0"
+toolbox.commons_version = "rc0.1.1"
+toolbox.android_version = "rc0.1.0"
+toolbox.group = "com.github.aleengo.peachbox"
+toolbox.artifact = "peank"
+toolbox.description = "Personal dev tools for Android"
+ext.toolbox = toolbox
+
+
+deps.android_maven_gradle_plugin = "com.github.dcendents:android-maven-gradle-plugin:2.1"
+
+deps.junit = "junit:junit:4.12"
+deps.lombok = "org.projectlombok:lombok:1.16.20"
+deps.gson = "com.google.code.gson:gson:2.8.5"
+
+def butterknife = [:]
+butterknife.runtime = "com.jakewharton:butterknife:10.0.0"
+butterknife.compiler = "com.jakewharton:butterknife-compiler:10.0.0"
+deps.butterknife = butterknife
+
+def okhttp = [:]
+okhttp.runtime = "com.squareup.okhttp3:okhttp:3.12.0"
+deps.okhttp = okhttp
+
+ext.deps = deps

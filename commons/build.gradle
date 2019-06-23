@@ -1,8 +1,8 @@
 apply plugin: 'java-library'
 apply plugin: 'maven'
 
-group=toolbox.group
-version=toolbox.commons_version
+/*group=toolbox.group
+version=toolbox.commons_version*/
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8

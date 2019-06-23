@@ -1,1 +1,1 @@
-include ':box', ':commons', ':peach'
+include ':box', ':commons', ':peach', ':ui-adapters'

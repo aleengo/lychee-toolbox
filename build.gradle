@@ -2,7 +2,9 @@
 
 buildscript {
 
-    apply from: 'versions.gradle'
+    apply from: 'androidx-deps.gradle'
+    apply from: 'dependencies.gradle'
+
     dependencies {
         classpath deps.android_gradle_plugin
         classpath deps.android_maven_gradle_plugin
